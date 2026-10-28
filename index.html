@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10251d" />
+    <title>Eco Track — your footprint, made clear</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#dashboard" aria-label="Eco Track home">
+          <span class="brand-mark">e</span>
+          <span>eco<span class="brand-light">track</span></span>
+        </a>
+        <p class="side-caption">YOUR PERSONAL IMPACT</p>
+        <nav class="nav-list" aria-label="Main navigation">
+          <button class="nav-item active" data-page="dashboard"><span>▦</span> Dashboard</button>
+          <button class="nav-item" data-page="add"><span>＋</span> Add activity</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <span class="leaf-icon">✳</span>
+          <p>Small choices.<br /><strong>Clearer impact.</strong></p>
+          <small>Prototype · data saved on this device</small>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">YOUR FOOTPRINT, MADE CLEAR</p>
+            <h1 id="page-title">Your dashboard</h1>
+          </div>
+          <div class="top-actions">
+            <label class="period-control">View
+              <select id="period-select" aria-label="Dashboard time period">
+                <option value="today">Today</option>
+                <option value="week" selected>This week</option>
+                <option value="month">This month</option>
+                <option value="year">This year</option>
+              </select>
+            </label>
+            <button class="primary-button" id="top-add">＋ Add activity</button>
+          </div>
+        </header>
+
+        <div class="demo-notice" role="note">
+          <span class="notice-dot"></span>
+          <span><strong>Factor note:</strong> electricity uses India’s FY 2024–25 grid factor. Transport, fuel and waste still use illustrative placeholders; replace them with selected, documented factors before presenting those results as verified.</span>
+        </div>
+
+        <section id="dashboard-page" class="page-section">
+          <div class="summary-grid">
+            <article class="summary-card total-card">
+              <div class="card-label">ESTIMATED FOOTPRINT <span class="info-dot" title="An estimate based on the activities you entered">i</span></div>
+              <div class="total-number" id="total-value">—</div>
+              <div class="unit-line">kg CO₂e <span id="period-label">this week</span></div>
+              <div class="card-foot"><span class="trend-arrow">↗</span> Based on your saved activities</div>
+            </article>
+            <article class="summary-card">
+              <div class="card-label">BIGGEST SOURCE</div>
+              <div class="source-name" id="top-category">—</div>
+              <div class="source-copy" id="top-category-copy">Add an activity to see your biggest source.</div>
+              <div class="source-icon" id="top-category-icon">✳</div>
+            </article>
+            <article class="summary-card">
+              <div class="card-label">ACTIVITIES SAVED</div>
+              <div class="count-number" id="entry-count">0</div>
+              <div class="source-copy">Entries in the selected period</div>
+              <div class="mini-spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </article>
+            <article class="summary-card comparison-card">
+              <div class="card-label" id="comparison-label">CHANGE VS PREVIOUS 7 DAYS</div>
+              <div class="comparison-number" id="comparison-value">—</div>
+              <div class="source-copy" id="comparison-copy">Record activities across two 7-day periods to compare.</div>
+            </article>
+          </div>
+
+          <div class="content-grid">
+            <article class="panel category-panel">
+              <div class="panel-heading">
+                <div><h2>Where your impact comes from</h2><p>Estimated emissions by category</p></div>
+                <span class="panel-icon">◔</span>
+              </div>
+              <div id="category-list" class="category-list"></div>
+              <div id="category-empty" class="empty-state compact-empty">
+                <span class="empty-icon">✳</span>
+                <strong>Your breakdown will appear here</strong>
+                <span>Add an activity to see which category contributes most.</span>
+              </div>
+            </article>
+
+            <article class="panel recommendation-panel">
+              <div class="panel-heading">
+                <div><h2>Suggestions for your activities</h2><p>Each saved activity gets its own practical next step</p></div>
+                <span class="sparkle">✦</span>
+              </div>
+              <div id="recommendation-list" class="recommendation-list"></div>
+              <div id="recommendation-empty" class="recommendation-empty">Add activities to get suggestions connected to each one.</div>
+              <div class="rec-footer"><span>✦</span> Suggestions follow your saved activities in the selected period.</div>
+            </article>
+          </div>
+
+          <article class="panel engagement-panel">
+            <div class="panel-heading">
+              <div><h2>Weekly challenges & badges</h2><p>Earn badges by logging practical actions. Badges reward participation, not measured CO₂ savings.</p></div>
+              <span class="sparkle">✦</span>
+            </div>
+            <div id="challenge-list" class="challenge-list"></div>
+            <div class="badge-heading"><strong>Your badges</strong><span id="badge-count">0 earned</span></div>
+            <div id="badge-list" class="badge-list"></div>
+          </article>
+
+          <article class="panel trend-panel">
+            <div class="panel-heading">
+              <div><h2>Footprint over the last 7 days</h2><p>Estimated daily emissions from saved entries</p></div>
+              <span class="trend-caption">kg CO₂e</span>
+            </div>
+            <div id="trend-chart" class="trend-chart"></div>
+          </article>
+
+          <article class="panel history-panel">
+            <div class="panel-heading history-heading">
+              <div><h2>Recent activity</h2><p>Your entries and carbon receipts</p></div>
+              <button class="text-button" id="history-add">＋ Add activity</button>
+            </div>
+            <div id="history-list" class="history-list"></div>
+            <div id="history-empty" class="empty-state history-empty">
+              <span class="empty-icon">↗</span>
+              <strong>No activities yet</strong>
+              <span>Your first saved carbon receipt will show up here.</span>
+              <button class="secondary-button" id="empty-add">Add your first activity</button>
+            </div>
+          </article>
+          <p class="disclaimer">Estimates depend on the information entered and the emission factors used. Missing information is not counted as zero.</p>
+        </section>
+
+        <section id="add-page" class="page-section hidden">
+          <div class="form-intro">
+            <p class="eyebrow">A QUICK ENTRY</p>
+            <h2>What did you do?</h2>
+            <p>Choose an activity and enter the amount. Eco Track will make a simple estimate.</p>
+          </div>
+          <div class="form-layout">
+            <form id="activity-form" class="panel activity-form">
+              <label class="field-label" for="category">Activity category</label>
+              <select id="category" class="input-control">
+                <option value="transport">Transport</option>
+                <option value="electricity">Electricity</option>
+                <option value="fuel">Fuel</option>
+                <option value="waste">Delivery packaging</option>
+              </select>
+              <div id="dynamic-fields"></div>
+              <div class="form-actions">
+                <button type="button" class="secondary-button" id="cancel-entry">Cancel</button>
+                <button type="submit" class="primary-button">Calculate & save receipt <span>→</span></button>
+              </div>
+              <p class="form-note">Your entries are saved in this browser on this device. This demo does not upload them.</p>
+            </form>
+            <aside class="panel receipt-preview">
+              <div class="receipt-icon">✳</div>
+              <p class="eyebrow">YOUR CARBON RECEIPT</p>
+              <h3>A clear record of one activity</h3>
+              <div class="receipt-rule"></div>
+              <div class="receipt-row"><span>Activity</span><strong id="preview-activity">Choose a category</strong></div>
+              <div class="receipt-row"><span>Amount</span><strong id="preview-amount">Enter an amount</strong></div>
+              <div class="receipt-rule dotted"></div>
+              <div class="receipt-total-label">ESTIMATED EMISSIONS</div>
+              <div class="receipt-total" id="preview-total">— <small>kg CO₂e</small></div>
+              <p class="receipt-source" id="preview-source">Factor source will appear here.</p>
+              <p class="receipt-foot">Estimate uses a demo factor. Your team should replace it with a verified factor.</p>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="recommendations.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
